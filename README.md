@@ -1,73 +1,99 @@
-# React + TypeScript + Vite
+# Silvia Scano — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio website built with **Vite + React + TypeScript**, featuring a dark/light mode toggle, smooth animations, and a fully working contact form.
 
-Currently, two official plugins are available:
+🔗 **Live site:** [silviascano.co.uk](https://silviascano.co.uk)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Built With
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Technology | Purpose |
+|---|---|
+| React + TypeScript | UI components and type safety |
+| Vite | Build tool and dev server |
+| Tailwind CSS | Utility-first styling |
+| Framer Motion | Animations and scroll effects |
+| EmailJS | Contact form email delivery |
+| Vercel | Hosting and CI/CD |
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Dark / light mode toggle with localStorage persistence and system preference detection
+- Smooth scroll navigation between sections
+- Animated section reveals using Framer Motion
+- Fully responsive — mobile, tablet, and desktop
+- Working contact form powered by EmailJS
+- Vercel Analytics for visitor tracking
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Sections
+
+- **Hero** — Introduction with profile photo, tagline, and CV download
+- **About** — Background, motivations, and highlights
+- **Skills** — Technical skills grouped by category
+- **Projects** — Allergen Label App, Staff Directory App, Gazetteer
+- **Contact** — Contact info and working email form
+
+---
+
+## Run Locally
+
+```bash
+git clone https://github.com/Mifa75/silviascano-portfolio.git
+cd silviascano-portfolio
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The app runs at `http://localhost:5173`
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Environment Variables
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Create a `.env` file in the root:
+
+```env
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
 ```
+
+---
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── Navbar.tsx
+│   ├── Hero.tsx
+│   ├── About.tsx
+│   ├── Skills.tsx
+│   ├── Projects.tsx
+│   ├── Contact.tsx
+│   └── Footer.tsx
+├── hooks/
+│   └── useTheme.ts
+├── types/
+│   └── project.ts
+└── App.tsx
+```
+
+---
+
+## Deployment
+
+Deployed on **Vercel** with automatic deployments on every push to `main`.
+
+Custom domain configured via Hostinger DNS → Vercel.
+
+---
+
+## Contact
+
+**Silvia Scano** — [scanosilvia75@gmail.com](mailto:scanosilvia75@gmail.com)
+
+[silviascano.co.uk](https://silviascano.co.uk) · [GitHub](https://github.com/Mifa75)

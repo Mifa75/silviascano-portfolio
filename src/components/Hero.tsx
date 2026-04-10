@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { FiGithub, FiLinkedin } from 'react-icons/fi'
-import { FiDownload, FiArrowRight } from 'react-icons/fi'
+import { FiGithub, FiLinkedin, FiDownload, FiArrowRight } from 'react-icons/fi'
+import myPhoto from '../assets/my-photo.png'
 
 const FADE_UP = {
   hidden: { opacity: 0, y: 28 },
@@ -155,18 +155,16 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
         >
           <div
-            className="relative w-56 h-56 md:w-72 md:h-72 rounded-full flex items-center justify-center select-none"
+            className="relative w-56 h-56 md:w-72 md:h-72 rounded-full overflow-hidden"
             style={{
-              background: 'linear-gradient(135deg, var(--accent) 0%, #C4B5FD 60%, #DDD6FE 100%)',
               boxShadow: '0 0 0 6px var(--accent-light), 0 0 0 12px var(--accent-border)',
             }}
           >
-            <span
-              className="text-white/80 text-sm font-medium text-center px-6"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              Your photo here
-            </span>
+            <img
+              src={myPhoto}
+              alt="Silvia Scano"
+              className="w-full h-full object-cover"
+            />
           </div>
         </motion.div>
 

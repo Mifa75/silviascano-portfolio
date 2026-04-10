@@ -1,7 +1,6 @@
 import { useTheme } from './hooks/useTheme'
 import { Navbar } from './components/Navbar'
-
-function Hero()     { return <section id="hero"     className="min-h-screen flex items-center justify-center text-[var(--text-muted)]">Hero</section> }
+import { Hero } from './components/Hero'
 function About()    { return <section id="about"    className="min-h-screen flex items-center justify-center text-[var(--text-muted)]">About</section> }
 function Skills()   { return <section id="skills"   className="min-h-screen flex items-center justify-center text-[var(--text-muted)]">Skills</section> }
 function Projects() { return <section id="projects" className="min-h-screen flex items-center justify-center text-[var(--text-muted)]">Projects</section> }

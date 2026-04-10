@@ -1,5 +1,7 @@
+import { useRef, useState } from 'react'
 import { type Variants, motion } from 'framer-motion'
 import { FiMail, FiGithub, FiMapPin } from 'react-icons/fi'
+import emailjs from '@emailjs/browser'
 
 const FADE_UP: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -32,7 +34,30 @@ const INFO_CARDS = [
   },
 ]
 
+type Status = 'idle' | 'loading' | 'success' | 'error'
+
 export function Contact() {
+  const formRef = useRef<HTMLFormElement>(null)
+  const [status, setStatus] = useState<Status>('idle')
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    if (!formRef.current) return
+    setStatus('loading')
+    try {
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY },
+      )
+      setStatus('success')
+      formRef.current.reset()
+    } catch {
+      setStatus('error')
+    }
+  }
+
   return (
     <section
       id="contact"
@@ -160,7 +185,8 @@ export function Contact() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
             <form
-              onSubmit={e => e.preventDefault()}
+              ref={formRef}
+              onSubmit={handleSubmit}
               className="flex flex-col gap-5 p-8 rounded-2xl"
               style={{
                 background: 'var(--bg-card)',
@@ -180,17 +206,17 @@ export function Contact() {
                   </label>
                   <input
                     id="contact-name"
+                    name="from_name"
                     type="text"
                     placeholder="Your name"
-                    disabled
+                    required
+                    disabled={status === 'loading'}
                     className="px-4 py-3 rounded-xl text-sm outline-none"
                     style={{
                       background: 'var(--bg)',
                       border: '1px solid var(--border)',
                       color: 'var(--text)',
                       fontFamily: 'var(--font-sans)',
-                      opacity: 0.6,
-                      cursor: 'not-allowed',
                     }}
                   />
                 </div>
@@ -204,17 +230,17 @@ export function Contact() {
                   </label>
                   <input
                     id="contact-email"
+                    name="from_email"
                     type="email"
                     placeholder="you@example.com"
-                    disabled
+                    required
+                    disabled={status === 'loading'}
                     className="px-4 py-3 rounded-xl text-sm outline-none"
                     style={{
                       background: 'var(--bg)',
                       border: '1px solid var(--border)',
                       color: 'var(--text)',
                       fontFamily: 'var(--font-sans)',
-                      opacity: 0.6,
-                      cursor: 'not-allowed',
                     }}
                   />
                 </div>
@@ -231,17 +257,17 @@ export function Contact() {
                 </label>
                 <input
                   id="contact-subject"
+                  name="subject"
                   type="text"
                   placeholder="What's this about?"
-                  disabled
+                  required
+                  disabled={status === 'loading'}
                   className="px-4 py-3 rounded-xl text-sm outline-none"
                   style={{
                     background: 'var(--bg)',
                     border: '1px solid var(--border)',
                     color: 'var(--text)',
                     fontFamily: 'var(--font-sans)',
-                    opacity: 0.6,
-                    cursor: 'not-allowed',
                   }}
                 />
               </div>
@@ -257,17 +283,17 @@ export function Contact() {
                 </label>
                 <textarea
                   id="contact-message"
+                  name="message"
                   rows={5}
                   placeholder="Your message…"
-                  disabled
+                  required
+                  disabled={status === 'loading'}
                   className="px-4 py-3 rounded-xl text-sm outline-none resize-none"
                   style={{
                     background: 'var(--bg)',
                     border: '1px solid var(--border)',
                     color: 'var(--text)',
                     fontFamily: 'var(--font-sans)',
-                    opacity: 0.6,
-                    cursor: 'not-allowed',
                   }}
                 />
               </div>
@@ -275,25 +301,34 @@ export function Contact() {
               {/* Submit */}
               <button
                 type="submit"
-                disabled
+                disabled={status === 'loading' || status === 'success'}
                 className="mt-1 px-8 py-3 rounded-full text-sm font-semibold text-white
-                           transition-opacity duration-200 hover:opacity-80 cursor-not-allowed"
+                           transition-opacity duration-200 hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-60"
                 style={{
                   background: 'var(--accent)',
                   fontFamily: 'var(--font-sans)',
-                  opacity: 0.7,
                 }}
               >
-                Send Message
+                {status === 'loading' ? 'Sending…' : 'Send Message'}
               </button>
 
-              {/* Coming soon note */}
-              <p
-                className="text-center text-xs"
-                style={{ color: 'var(--text-muted)', fontFamily: 'var(--font-sans)' }}
-              >
-                Form submission coming soon — for now, please reach out via email.
-              </p>
+              {/* Status feedback */}
+              {status === 'success' && (
+                <p
+                  className="text-center text-sm font-medium"
+                  style={{ color: '#059669', fontFamily: 'var(--font-sans)' }}
+                >
+                  Message sent! I'll get back to you soon.
+                </p>
+              )}
+              {status === 'error' && (
+                <p
+                  className="text-center text-sm font-medium"
+                  style={{ color: '#DC2626', fontFamily: 'var(--font-sans)' }}
+                >
+                  Something went wrong. Please email me directly.
+                </p>
+              )}
             </form>
           </motion.div>
 

@@ -60,11 +60,17 @@
 }
 
 html {
+  scroll-behavior: smooth;
   color-scheme: light dark;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Offset for fixed navbar when jumping to anchor links */
+section[id] {
+  scroll-margin-top: 5rem;
 }
 
 body {

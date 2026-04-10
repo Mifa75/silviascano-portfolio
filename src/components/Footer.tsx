@@ -13,7 +13,7 @@ const SOCIAL_LINKS = [
   },
   {
     icon: FiLinkedin,
-    href: 'https://linkedin.com/in/silvia-scano',
+    href: 'https://www.linkedin.com/in/silvia-scano-0a98a0258/',
     label: 'LinkedIn',
   },
 ]

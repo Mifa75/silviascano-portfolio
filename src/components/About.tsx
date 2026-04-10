@@ -62,7 +62,7 @@ export function About() {
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
             <div
-              className="w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden"
+              className="w-56 h-56 md:w-64 md:h-64 rounded-2xl overflow-hidden"
               style={{
                 boxShadow: '0 0 0 6px var(--accent-light), 0 0 0 12px var(--accent-border)',
               }}
